@@ -1017,21 +1017,21 @@ Never use `::` for regular method invocation.
 
     ```Ruby
     # bad (+ a warning)
-    if v = array.grep(/foo/)
-      do_something(v)
+    if v = array.grep /foo/
+      do_something v
       ...
     end
 
     # good (MRI would still complain, but RuboCop won't)
-    if (v = array.grep(/foo/))
-      do_something(v)
+    if (v = array.grep /foo/)
+      do_something v
       ...
     end
 
     # good
-    v = array.grep(/foo/)
+    v = array.grep /foo/
     if v
-      do_something(v)
+      do_something v
       ...
     end
     ```
@@ -1083,7 +1083,7 @@ would happen if the current value happened to be `false`.)
     /something/ === some_string
 
     # good
-    something.is_a?(Array)
+    something.is_a? Array
     (1..100).include?(7)
     some_string =~ /something/
     ```
@@ -1095,11 +1095,11 @@ would happen if the current value happened to be `false`.)
 
     ```Ruby
     # bad
-    $:.unshift File.dirname(__FILE__)
+    $:.unshift File.dirname __FILE__
 
     # good
     require 'English'
-    $LOAD_PATH.unshift File.dirname(__FILE__)
+    $LOAD_PATH.unshift File.dirname __FILE__
     ```
 
 * Never put a space between a method name and the opening parenthesis.
@@ -1201,14 +1201,14 @@ setting the warn level to 0 via `-W0`).
     # => '20 10'
 
     # good
-    sprintf('%{first} %{second}', first: 20, second: 10)
+    sprintf '%{first} %{second}', first: 20, second: 10
     # => '20 10'
 
     format('%d %d', 20, 10)
     # => '20 10'
 
     # good
-    format('%{first} %{second}', first: 20, second: 10)
+    format '%{first} %{second}', first: 20, second: 10
     # => '20 10'
     ```
 
@@ -1235,7 +1235,7 @@ setting the warn level to 0 via `-W0`).
     paths.each { |path| do_something(path) }
 
     # good
-    [*paths].each { |path| do_something(path) }
+    [*paths].each { |path| do_something path }
 
     # good (and a bit more readable)
     Array(paths).each { |path| do_something(path) }
@@ -1307,23 +1307,23 @@ setting the warn level to 0 via `-W0`).
 
     ```Ruby
     # bad
-      def compute_thing(thing)
+      def compute_thing thing
         if thing[:foo]
-          update_with_bar(thing)
+          update_with_bar thing
           if thing[:foo][:bar]
-            partial_compute(thing)
+            partial_compute thing
           else
-            re_compute(thing)
+            re_compute thing
           end
         end
       end
 
     # good
-      def compute_thing(thing)
+      def compute_thing thing
         return unless thing[:foo]
-        update_with_bar(thing[:foo])
-        return re_compute(thing) unless thing[:foo][:bar]
-        partial_compute(thing)
+        update_with_bar thing[:foo]
+        return re_compute thing unless thing[:foo][:bar]
+        partial_compute thing
       end
     ```
 
