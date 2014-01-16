@@ -519,8 +519,7 @@ Never use `::` for regular method invocation.
     SomeModule::SomeClass()
     ```
 
-* Use `def` with parentheses when there are arguments. Omit the
-  parentheses when the method doesn't accept any arguments.
+* Never use `def` with parentheses.
 
      ```Ruby
      # bad
@@ -534,12 +533,12 @@ Never use `::` for regular method invocation.
      end
 
      # bad
-     def some_method_with_arguments arg1, arg2
+     def some_method_with_arguments(arg1, arg2)
        # body omitted
      end
 
      # good
-     def some_method_with_arguments(arg1, arg2)
+     def some_method_with_arguments arg1, arg2
        # body omitted
      end
      ```
